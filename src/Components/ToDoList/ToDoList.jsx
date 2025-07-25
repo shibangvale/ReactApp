@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import '../Components/ToDoList.css'
+import '../ToDoList/ToDoList.css'
 
 
 function  ToDoList()
@@ -40,7 +40,7 @@ function  ToDoList()
       <div className="panel panel-default">
         <div className="panel-body">
           <div className="form-group">
-            <label for="exampleInputLabel1"><h3>Todo List</h3></label>
+            <label htmlFor="exampleInputLabel1"><h3>Todo List</h3></label>
             <div className="inline-form">
               <div className="input-container">
                 <input

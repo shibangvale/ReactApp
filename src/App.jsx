@@ -1,5 +1,5 @@
 // App.js 
-import ToDoList from './Components/ToDoList'
+import ToDoList from './Components/ToDoList/ToDoList'
 
 // import 'jquery/dist/jquery.min.js'
 
