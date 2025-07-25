@@ -1,0 +1,23 @@
+.inline-form {
+  width: 100%;
+  display: block;
+}
+
+.inline-form>div {
+  float: left;
+}
+
+.inline-form .input-container {
+  display: inline-block !important;
+  width: 80% !important;
+  padding-right: 5px;
+}
+
+.inline-form .button-container {
+  display: inline-block !important;
+  width: calc(20% - 1px) !important;
+}
+
+.inline-form .button-container button {
+  width: 100%;
+}
