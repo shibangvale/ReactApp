@@ -7,18 +7,36 @@ import '../ToDoList/ToDoList.css'
 function  ToDoList()
 {
     const [text, setText] = useState("");
+    const [error, setError] = useState('error');
+
+    const handleInputChange = (e) => {
+      const value = e.target.value;
+      setText(value);
+
+      // Validate if the input is not empty
+      if (!value.trim()) {
+        setError('This field is required.');
+      } else {
+        setError('');
+      }
+    };
+
     const dispatch = useDispatch();
      const todos = useSelector((state) => {
       return state.todos;
      });
 
-    const handleAddTodo = () => {
-      let todoItem =  {
+    const handleAddTodo = (e) => {
+      e.preventDefault();
+      if (!error) {
+        let todoItem =  {
                 id: new Date().getTime(),
                 text:text
             };
-      dispatch({ type: 'ADD_TODO', payload:todoItem });
-      setText("");
+        dispatch({ type: 'ADD_TODO', payload:todoItem });
+        setText("");
+        setError('error');
+      }
     };
 
     const handleRemoveTodo = (id) => {
@@ -30,40 +48,37 @@ function  ToDoList()
     };
 
     return (
-        <div id="app">
-
-
-<div className="container">
-  <br />
-  <div className="row">
-    <div className="col-md-12">
-      <div className="panel panel-default">
-        <div className="panel-body">
-          <div className="form-group">
-            <label htmlFor="exampleInputLabel1"><h3>Todo List</h3></label>
-            <div className="inline-form">
-              <div className="input-container">
-                <input
-                    className="form-control" id="exampleInputText1"
-                    type="text"
-                    value={text}
-                    onChange={(e) => 
-                        setText(e.target.value)}
-                    placeholder="Enter a task..."
-                />
-              </div>
-              <div className="button-container">
-                <button type="button" onClick={handleAddTodo} className="btn btn-primary mx-3">
-                    Add
-                </button>
+        <>
+          <div className="container">
+            <br />
+            <div className="row">
+              <div className="col-md-12">
+                <div className="panel panel-default">
+                  <div className="panel-body">
+                    <div className="form-group">
+                      <label htmlFor="exampleInputLabel1"><h3>Todo List</h3></label>
+                      <div className="inline-form">
+                        <div className="input-container">
+                          <input
+                              className="form-control" id="exampleInputText1"
+                              type="text"
+                              value={text}
+                              onChange={handleInputChange}
+                              placeholder="Enter a task..."
+                          />
+                        </div>
+                        <div className="button-container">
+                          <button type="button" onClick={handleAddTodo} className="btn btn-primary mx-3">
+                              Add
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
             <div>
                 <ul className="list-group my-3">
@@ -82,7 +97,7 @@ function  ToDoList()
                     ))}
                 </ul>
             </div>
-        </div>
+        </>
     )
 }
 
